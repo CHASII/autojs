@@ -226,19 +226,3 @@ function killApp(packageName) {
 
 engines.stopAllAndToast(); // 停止所有脚本
 console.error();
-
-
-
-
-le.error();
-
-
-
-
-
-
-le.error();
-
-
-
-
