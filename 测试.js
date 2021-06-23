@@ -161,4 +161,4 @@ function foundText(msg) {
   }
   return res;
 }
-foundText("关注有礼")
+// foundText("关注有礼")

@@ -21,25 +21,7 @@ var Hor = 'android.widget.HorizontalScrollView'
 var urlArray = []; // 存放url的数组
 var shop_array = []; // 存放店铺名的数组
 var fmatArray = []; // 去除urlArray空元素后的数组
-
-function tgClick() {
-  console.info("获取链接中...")
-  var tgCli = className(ViewGroup).depth(9).drawingOrder(1).findOne(3000);
-  if (tgCli != null) {
-    var all = tgCli.desc().toString().split('\n');
-  } else {
-    return [];
-  }
-  urlArray = getUrl(all);
-  for (var i = 0; i < urlArray.length; i++) {
-    if (urlArray[i] != "") {
-      fmatArray.push(urlArray[i]);
-    }
-
-  }
-
-  return fmatArray;
-}
+var isSkip = 0;
 
 
 if (tgClick().length && canary()) {
@@ -69,15 +51,24 @@ if (shop_array.length) {
     if (shop_array[i] != null) {
       sleep(2000)
       console.info("开始执行第" + (i + 1) + "个店铺：" + shop_array[i])
-      openJd(shop_array[i]);
+      // log(openJd(shop_array[i]))
+      if (openJd(shop_array[i])) {
+        isSkip = 1;
+      }
+      // log(isSkip)
     }
+
   }
   sleep(2000)
-  otherScript("main")
+  if (isSkip) {
+    otherScript("main")
+  } else {
+    killApp("com.guoshi.httpcanary.premium")
+  }
   console.info("执行完毕, 脚本关闭...");
   killApp(appName);
   sleep(1000);
-  console.hide();
+  console.hide()
   exit();
 } else {
   console.info("没有店铺信息，退出脚本");
@@ -85,6 +76,25 @@ if (shop_array.length) {
   console.hide();
   killApp(appName);
   exit();
+}
+
+function tgClick() {
+  console.info("获取链接中...")
+  var tgCli = className(ViewGroup).depth(9).drawingOrder(1).findOne(3000);
+  if (tgCli != null) {
+    var all = tgCli.desc().toString().split('\n');
+  } else {
+    return [];
+  }
+  urlArray = getUrl(all);
+  for (var i = 0; i < urlArray.length; i++) {
+    if (urlArray[i] != "") {
+      fmatArray.push(urlArray[i]);
+    }
+
+  }
+
+  return fmatArray;
 }
 
 //  获取店铺名
@@ -106,6 +116,24 @@ function getShop() {
   }
 }
 
+function isExists(shopName) {
+  if (className(ViewFlipper).depth(9).exists()) {
+    // log("ViewFlipper存在")
+    HomeBar();
+    isExists(shopName)
+    return 1;
+  }
+  else if (className(EditText).depth(6).exists() || className(Hor).depth(9).exists()) {
+    // log("EditText存在")
+    Edit(shopName);
+    return 1
+  } else {
+    back();
+    isExists(shopName)
+    return 1
+  }
+  return 0
+}
 
 // 打开京东后续操作
 function openJd(shopName) {
@@ -113,18 +141,9 @@ function openJd(shopName) {
 
 
   // 点击HomeBar
-  HomeBar();
+  // isExists(shopName)
 
-  // 输入店铺名称
-  Edit(shopName);
-
-  sleep(1000);
-
-  // sleep(1000);
-  // 返回之后，或者重新搜索部分
-  //afterInput(shopName);
-
-  if (click("进店", 0)) {
+  if (isExists(shopName) && click("进店", 0)) {
     console.info("进入店铺成功")
     sleep(2000)
 
@@ -138,23 +157,23 @@ function openJd(shopName) {
       if (foundText("关注有礼")) { // 关注有礼存在则点击
         sleep(1500);
         // 弹窗处理
-        if(otherWindow("收下好礼 先收先得")){
-          console.info("关注成功,开始返回");
-          sleep(2000)
-          back()
-          sleep(1000);
-          return 1;
-        } // 处理点击后弹窗
-      } else {
+        otherWindow("收下好礼 先收先得")
+        console.info("关注成功,开始返回");
+        sleep(1000)
+        back()
+        // sleep(1000);
+        return 1;
+      } // 处理点击后弹窗
+      else {
         log("不是有礼关注按钮")
         back();
-        return 1;
+        return 0;
       }
     }
   }
   else {
     console.error("不存在，查找下一个");
-    return 1;
+    return 0;
   }
 
 }
@@ -244,7 +263,7 @@ function otherWindow(msgs) {
   // let msg = msgs.split(" ")
   for (let msg of strs) {
     // log(msg)
-    let other = text(msg).findOne(3000)
+    let other = text(msg).findOne(1500)
     if (other != null) {
       text(msg).waitFor();
       sleep(1000);

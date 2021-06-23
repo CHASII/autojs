@@ -1,4 +1,8 @@
-console.show()
+console.show();
+console.clear(); // 清除控制台
+console.setPosition(400, 400); // 设置控制台位置
+var ViewFlipper = 'android.widget.ViewFlipper'
+var EditText = 'android.widget.EditText'
 
 function getReq(url, cookie) {
   //  log("jhhhh")
@@ -50,3 +54,18 @@ function getShopName(urls) {
   return shopNames;
 }
 // var shopNames = getShopName(["https://u.jd.com/GbykL6N","https://u.jd.com/Gy2CQbf"])
+function HomeBar() {
+  var bar = className(ViewFlipper).depth(9).findOne(2000);
+  if (className(ViewFlipper).depth(9).exists()) {
+    log("ViewFlipper存在")
+  }
+                  
+  // if (bar != null) {
+  //   var b = bar.bounds();
+  //   sleep(2000);
+  //   click(b.centerX(), b.centerY());
+  // } else {
+  //   log('无搜索框')
+  // }
+}
+HomeBar()
