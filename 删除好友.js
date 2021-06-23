@@ -36,5 +36,5 @@ for (var i = 0;;) {
       back()
     }
   }
-  sleep(000)
+  sleep(2500)
 }
