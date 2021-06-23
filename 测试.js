@@ -163,9 +163,14 @@ function foundText(msg) {
 }
 // foundText("关注有礼")
 
-var image = className("android.widget.ImageView").depth(2).findOne(2000)
-if (image != null) {
-  log("存在")
-}else {
-  log("不存在")
+// var image = className("android.widget.ImageView").depth(2).findOne(2000)
+// if (image != null) {
+//   log("存在")
+// }else {
+//   log("不存在")
+// }
+log(className("android.view.ViewGroup").depth(9).drawingOrder(2).findOne(500))
+if (!className("android.view.ViewGroup").depth(9).drawingOrder(2).exists()) {
+  log("删除完成，退出")
+  // break
 }

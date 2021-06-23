@@ -13,9 +13,10 @@ app.startActivity({
 // log(friends.size())
 for (var i = 0; ;) {
   // var friends = className("android.view.ViewGroup").depth(9).drawingOrder(2).find()
-  var friend = className("android.view.ViewGroup").depth(9).drawingOrder(2).findOne()
+  var friend = className("android.view.ViewGroup").depth(9).drawingOrder(2).findOne(500)
   // log(className("android.view.ViewGroup").depth(9).exists())
-  if (!className("android.view.ViewGroup").depth(9).exists()) {
+  if (friend == null) {
+    log("删除完成，退出")
     break
   }
   var image = className("android.widget.ImageView").depth(2).findOne(500)
