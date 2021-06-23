@@ -162,3 +162,10 @@ function foundText(msg) {
   return res;
 }
 // foundText("关注有礼")
+
+var image = className("android.widget.ImageView").depth(2).findOne(2000)
+if (image != null) {
+  log("存在")
+}else {
+  log("不存在")
+}
