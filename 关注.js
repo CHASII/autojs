@@ -78,6 +78,7 @@ if (shop_array.length) {
   exit();
 }
 
+// 从tg中获取链接
 function tgClick() {
   console.info("获取链接中...")
   var tgCli = className(ViewGroup).depth(9).drawingOrder(1).findOne(3000);
@@ -97,7 +98,7 @@ function tgClick() {
   return fmatArray;
 }
 
-//  获取店铺名
+//  获取店铺名（无效，已经用getShopName函数代替）
 function getShop() {
   console.info('获取店铺名...');
   let shopTitle = className(TextView).depth(7).drawingOrder(2)
