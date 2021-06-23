@@ -21,7 +21,7 @@ for (var i = 0;;) {
   if(friend.click()) {
 
     let manage = desc("管理").depth(12).findOne(3000)
-    if (desc("管理").depth(12).exists()) {
+    if (desc("管理").depth(12).exists() && manage != null) {
       log("存在")
       click(manage.bounds().centerX(), manage.bounds().centerY());
   
