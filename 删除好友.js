@@ -38,3 +38,8 @@ for (var i = 0;;) {
   }
   sleep(2500)
 }
+
+
+console.hide()
+toast("删除完成，结束");
+exit()
