@@ -78,7 +78,6 @@ if (shop_array.length) {
   exit();
 }
 
-// 从tg中获取链接
 function tgClick() {
   console.info("获取链接中...")
   var tgCli = className(ViewGroup).depth(9).drawingOrder(1).findOne(3000);
@@ -98,7 +97,7 @@ function tgClick() {
   return fmatArray;
 }
 
-//  获取店铺名（无效，已经用getShopName函数代替）
+//  获取店铺名
 function getShop() {
   console.info('获取店铺名...');
   let shopTitle = className(TextView).depth(7).drawingOrder(2)
@@ -228,7 +227,7 @@ function killApp(packageName) {
 
 // 获取关注url
 function getUrl(all) {
-  let re = /关注|^\d$|^\d.*跳转APP$/i;
+  let re = /关注|^\d$|^\d.*跳转APP$|^\d豆$/i;
   // let re = /he/i
   let re_url = /^https/i;
   let url_ary = [];

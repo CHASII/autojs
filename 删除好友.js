@@ -1,22 +1,21 @@
 // root
-console.show()
+
 // 跳转京东好有页面
 // log(desc("管理").depth(12).find().size())
 app.startActivity({
-  packageName: "com.jingdong.app.mall",
-  className: "com.jd.lib.jdfriend.view.activity.FriendListActivity",
-  root: true
+    packageName: "com.jingdong.app.mall", 
+    className: "com.jd.lib.jdfriend.view.activity.FriendListActivity", 
+    root: true
 });
-
+console.show()
 // var friends = className("android.widget.TextView").depth(10).drawingOrder(3).find()
 
 // log(friends.size())
 for (var i = 0; ;) {
   // var friends = className("android.view.ViewGroup").depth(9).drawingOrder(2).find()
-  var friend = className("android.view.ViewGroup").depth(9).drawingOrder(2).findOne(500)
+  var friend = className("android.view.ViewGroup").depth(9).drawingOrder(2).findOne(3000)
   // log(className("android.view.ViewGroup").depth(9).exists())
   if (friend == null) {
-    log("删除完成，退出")
     break
   }
   var image = className("android.widget.ImageView").depth(2).findOne(500)
@@ -47,6 +46,9 @@ for (var i = 0; ;) {
 }
 
 
+console.hide()
+toast("删除完成，结束");
+exit()
 console.hide()
 toast("删除完成，结束");
 exit()
