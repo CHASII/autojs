@@ -200,7 +200,7 @@ function getReq(url, cookie) {
 // 将结果发送给bot
 function sendMessage(msg) {
   // url
-  let url = 'https://jd2.dudu48021.workers.dev/bot1540229015:AAHPL_uCyTQuggkJHBQVC7jALwrU_SKELOY/sendMessage?chat_id=1204688751&text='+msg;
+  let url = 'bot连接'+msg;
   try {
     let res = http.get(url);
     console.log(res.body.json().ok);
